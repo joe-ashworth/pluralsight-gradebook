@@ -11,27 +11,6 @@ namespace GradeBook
       Name = name;
     }
 
-    public void AddLetterGrade(char letter)
-    {
-      switch (letter)
-      {
-        case 'A':
-          AddGrade(90);
-          break;
-
-        case 'B':
-          AddGrade(80);
-          break;
-
-        case 'C':
-          AddGrade(70);
-          break;
-
-        default:
-          AddGrade(0);
-          break;
-      }
-    }
     public void AddGrade(double grade)
     {
       if (grade <= 100 && grade >= 0)
@@ -40,7 +19,7 @@ namespace GradeBook
       }
       else
       {
-        Console.WriteLine("Invalid Value");
+        throw new ArgumentException($"Invalid {nameof(grade)}");
       }
     }
     public Statistics GetStatistics()
@@ -85,7 +64,13 @@ namespace GradeBook
     }
 
     private List<double> grades;
-    public string Name;
+    public string Name
+    {
+      get;
+      private set;
+    }
+
+    public const string category = "Science";
 
   }
 }
